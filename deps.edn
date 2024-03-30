@@ -1,0 +1,4 @@
+{:paths ["src"]
+ :deps  {ring/ring-core {:mvn/version "1.12.1"}
+         net.bramp.ffmpeg/ffmpeg {:mvn/version "0.8.0"}
+         com.taoensso/carmine {:mvn/version "3.3.2"}}}
