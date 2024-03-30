@@ -1,5 +1,6 @@
 (ns upload.core
-  (:require [broker.core :as broker])
+  (:require [broker.core :as broker]
+            [clojure.java.io :as jio])
   (:import [net.bramp.ffmpeg FFmpeg]
            [net.bramp.ffmpeg.builder FFmpegBuilder]))
 
