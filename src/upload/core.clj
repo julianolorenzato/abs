@@ -1,7 +1,8 @@
 (ns upload.core
   (:require [broker.core :as broker]
             [clojure.java.shell :as jsh])
-  (:import [java.io File]))
+  (:import [java.io File])
+  (:gen-class))
 
 (defn encode-hls-video
   [video-title segment-duration]

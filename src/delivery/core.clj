@@ -5,7 +5,8 @@
             [broker.core :as broker]
             [compojure.core :refer [defroutes GET POST]]
             [compojure.route :as route]
-            [clojure.java.io :as jio]))
+            [clojure.java.io :as jio])
+  (:gen-class))
 
 
 (defn handle-upload [video title]

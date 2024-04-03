@@ -4,4 +4,7 @@
          ring/ring-defaults {:mvn/version "0.4.0"}
          compojure/compojure {:mvn/version "1.7.1"}
          net.bramp.ffmpeg/ffmpeg {:mvn/version "0.8.0"}
-         com.taoensso/carmine {:mvn/version "3.3.2"}}}
+         com.taoensso/carmine {:mvn/version "3.3.2"}}
+
+ :aliases {:build {:deps {io.github.clojure/tools.build {:git/tag "v0.10.0" :git/sha "3a2c484"}}
+                   :ns-default build}}}
