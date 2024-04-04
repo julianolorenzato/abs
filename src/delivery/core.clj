@@ -3,7 +3,7 @@
             [ring.middleware.multipart-params :refer [wrap-multipart-params]]
             [ring.util.response :refer [redirect]]
             [broker.core :as broker]
-            [compojure.core :refer [defroutes GET POST context]]
+            [compojure.core :refer [defroutes GET POST]]
             [compojure.route :as route]
             [clojure.java.io :as jio])
   (:import [java.io File])
@@ -29,13 +29,11 @@
 
 
 (defroutes app-routes
-  (GET "/" [] "<h1>Hello wordl</h1>")
+  (route/files "/streaming" {:root "/videos"})
+  (GET "/" [] (slurp (jio/resource "public/index.html")))
   (POST "/upload" {{video "video" title "title"} :params}
     (handle-upload video title)
-    (redirect "/index.html"))
-  (context "/streaming" []
-    (route/files "/videos" {:root "/"}))
-  (route/resources "/")
+    (redirect "/"))
   (route/not-found "Page not found"))
 
 (defn -main
