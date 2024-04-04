@@ -1,31 +1,23 @@
 (ns upload.core
   (:require [broker.core :as broker]
             [clojure.java.shell :as jsh])
-  (:import [java.io File])
   (:gen-class))
 
 (defn encode-hls-video
   [video-title segment-duration]
-  (let [raw-path (str "resources/raw/" video-title)
-        processed-directory (str "resources/public/hls/" video-title)]
+  (println "Starting to encode [" video-title "] to HLS")
 
-    (if (.mkdir (File. (str "resources/public/hls/" video-title)))
-      (println "directory [resources/public/hls/" video-title "] created successfully!")
-      (println "error creating directory!"))
+  (println (jsh/sh "ffmpeg"
+                   "-i" (str "/videos/" video-title "/raw") ; input
+                   "-profile:v" "baseline",
+                   "-level" "3.0"
+                   "-start_number" "0"
+                   "-hls_time" (str segment-duration)
+                   "-hls_list_size" "0"
+                   "-f" "hls"
+                   (str "/videos/" video-title "/hls/playlist.m3u8")))
 
-    (println "Starting to encode [" video-title "] to HLS")
-
-    (jsh/sh "ffmpeg"
-            "-i" (str "resources/raw/" video-title) ; input
-            "-profile:v" "baseline",
-            "-level" "3.0"
-            "-start_number" "0"
-            "-hls_time" (str segment-duration)
-            "-hls_list_size" "0"
-            "-f" "hls"
-            (str "resources/public/hls/" video-title "/playlist.m3u8"))
-
-    (println "[" video-title "] encoded to HLS successfully!")))
+  (println "[" video-title "] encoded to HLS successfully!"))
 
 
 (defn handle-new-msg
@@ -37,7 +29,6 @@
 
 (defn -main
   "The upload's entrypoint"
-  [& args]
+  [& _args]
   (println "checking the connection!" (broker/ping))
-  (broker/make-listener handle-new-msg)
-  (println "upload's args: " args))
+  (broker/make-listener handle-new-msg))

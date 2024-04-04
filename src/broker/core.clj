@@ -1,7 +1,7 @@
 (ns broker.core
   (:require [taoensso.carmine :as car :refer [wcar]]))
 
-(def ^:private wcar-opts {:pool {} :spec {:uri "redis://localhost:6379"}})
+(def ^:private wcar-opts {:pool {} :spec {:uri "redis://broker:6379"}})
 
 (defn publish [channel msg] (wcar wcar-opts (car/publish channel msg)))
 

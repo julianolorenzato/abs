@@ -1,5 +1,26 @@
 services:
+  delivery:
+    depends_on:
+      - upload
+    build:
+      context: .
+      dockerfile: ./src/delivery/Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - videos-vol:/videos
+
+  upload:
+    depends_on:
+      - broker
+    build:
+      context: .
+      dockerfile: ./src/upload/Dockerfile
+    volumes:
+      - videos-vol:/videos
+
   broker:
     image: redis
-    ports:
-      - 6379:6379
+
+volumes:
+  videos-vol:
