@@ -5,7 +5,7 @@ COPY . /app
 WORKDIR /app
 
 RUN clj -P
-RUN clj -T:build uber :main upload.core
+RUN clj -T:build uber :main converter.core
 
 FROM eclipse-temurin:17-jammy
 

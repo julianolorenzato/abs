@@ -1,7 +1,7 @@
 services:
   delivery:
     depends_on:
-      - upload
+      - converter
     build:
       context: .
       dockerfile: ./src/delivery/Dockerfile
@@ -10,12 +10,12 @@ services:
     volumes:
       - videos-vol:/videos
 
-  upload:
+  converter:
     depends_on:
       - broker
     build:
       context: .
-      dockerfile: ./src/upload/Dockerfile
+      dockerfile: ./src/converter/Dockerfile
     volumes:
       - videos-vol:/videos
 
