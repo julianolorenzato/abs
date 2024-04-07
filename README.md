@@ -1,3 +1,9 @@
+<h1 align="center">Adaptative Bitrate Streaming POC</h1>
+
+This is a proof of concept of an on-demand video streaming platform with support to adaptative bitrate streaming via hls protocol.
+
+> Support to MPEG-DASH is still not available.
+
 ## How to run
 
-First certify to have FFmpeg installed and its path in your `PATH` environment variable (the project will use the `ffmpeg` command instead of the absolute path)
+Ensure to have Docker and Docker Compose installed and run the `docker compose up --build` command.
